@@ -5,9 +5,21 @@ from audio_event_detector.dataset.esc50_torch import ESC50Torch
 from audio_event_detector.models.cnn import AudioCNN
 from audio_event_detector.models.evaluate import evaluate
 
-def train(root="data/raw/esc50", epochs=5, batch_size=32):
+TARGET_CLASSES = [
+    "dog",
+    "cat",
+    "crying_baby",
+    "glass_breaking",
+    "siren"
+]
 
-    dataset = ESC50Torch(root)
+def train(root="data/raw/esc50", epochs=30, batch_size=32):
+
+    dataset = ESC50Torch(root, target_classes=TARGET_CLASSES)
+    
+    print("dataset size:", len(dataset))
+    print("classes:", dataset.classes)
+
 
     train_size = int(0.8 * len(dataset))
     val_size = len(dataset) - train_size
@@ -23,6 +35,8 @@ def train(root="data/raw/esc50", epochs=5, batch_size=32):
 
     criterion = torch.nn.CrossEntropyLoss()
     optimizer = torch.optim.Adam(model.parameters(), lr=1e-3)
+    
+    best_val_acc = 0
 
     for epoch in range(epochs):
 
@@ -47,6 +61,12 @@ def train(root="data/raw/esc50", epochs=5, batch_size=32):
 
             total_loss += loss.item()
         acc, _ = evaluate(model, val_loader, device)
+        
+        if acc > best_val_acc:
+            best_val_acc = acc
+            torch.save(model.state_dict(), "model_best.pt")
+
+
         print(f"epoch {epoch+1} loss {total_loss:.3f} val_acc{acc:.3f}")
 
     return model

@@ -7,12 +7,21 @@ from torch.utils.data import Dataset
 from audio_event_detector.features.spectrogram import load_audio, mel_spectrogram
 
 
+
+
 class ESC50Torch(Dataset):
 
-    def __init__(self, root):
+    def __init__(self, root, target_classes=None):
+
         self.root = Path(root)
 
         self.meta = pd.read_csv(self.root / "meta" / "esc50.csv")
+
+        if target_classes is not None:
+            self.meta = self.meta[self.meta["category"].isin(target_classes)]
+
+        self.meta = self.meta.reset_index(drop=True)
+
         self.audio_dir = self.root / "audio"
 
         self.classes = sorted(self.meta["category"].unique())
