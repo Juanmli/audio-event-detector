@@ -1,0 +1,14 @@
+__pycache__/
+*.pyc
+*.pyo
+
+.env
+.venv
+
+data/raw
+data/processed
+
+models/checkpoints
+models/tflite
+
+.ipynb_checkpoints

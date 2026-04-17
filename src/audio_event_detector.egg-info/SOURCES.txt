@@ -1,0 +1,17 @@
+README.md
+pyproject.toml
+src/audio_event_detector/__init__.py
+src/audio_event_detector/config.py
+src/audio_event_detector.egg-info/PKG-INFO
+src/audio_event_detector.egg-info/SOURCES.txt
+src/audio_event_detector.egg-info/dependency_links.txt
+src/audio_event_detector.egg-info/requires.txt
+src/audio_event_detector.egg-info/top_level.txt
+src/audio_event_detector/dataset/loader.py
+src/audio_event_detector/dataset/preprocessing.py
+src/audio_event_detector/export/tflite_export.py
+src/audio_event_detector/features/spectrogram.py
+src/audio_event_detector/inference/streaming.py
+src/audio_event_detector/inference/trigger_logic.py
+src/audio_event_detector/models/cnn.py
+src/audio_event_detector/models/train.py

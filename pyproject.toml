@@ -1,0 +1,16 @@
+[project]
+name = "audio-event-detector"
+version = "0.1.0"
+description = "Tiny audio event detection for mobile using TFLite"
+requires-python = ">=3.10"
+
+dependencies = [
+    "numpy",
+    "pandas",
+    "torch",
+    "torchaudio",
+    "librosa",
+    "matplotlib",
+    "scikit-learn",
+    "tensorflow",
+]
